@@ -109,7 +109,7 @@ public class ITEventCreationTest extends AbstractTest {
                 "Event", EventCreationFormPage.class);
 
         return eventCreationFormPage.createEventDocument(
-                "My Event", "Event description", "1/1/2000 12:00 PM", "1/1/2300 12:00 PM");
+                "My Event", "Event description", "1/1/2300 12:00 PM", "1/1/2300 12:00 PM");
     }
 
     @Test
