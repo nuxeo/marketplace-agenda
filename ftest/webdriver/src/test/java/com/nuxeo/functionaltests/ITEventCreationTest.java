@@ -129,7 +129,7 @@ public class ITEventCreationTest extends AbstractTest {
 
         driver.switchTo().defaultContent();
         driver.switchTo().frame("fancybox-frame");
-        driver.findElement(By.xpath("//div[@gadget-name='agenda']")).click();
+        waitUntilElementPresent(By.xpath("//div[@gadget-name='agenda']")).click();
         driver.switchTo().defaultContent();
 
         // test the content
@@ -143,6 +143,7 @@ public class ITEventCreationTest extends AbstractTest {
 
         assertEquals("Incoming events", agendaDriver.findElement(By.id("betweenBanner")).getText());
         assertTrue(agendaDriver.findElement(By.id("agenda")).getText().contains("My Event"));
+        agendaDriver.switchTo().defaultContent();
 
         logout();
     }
