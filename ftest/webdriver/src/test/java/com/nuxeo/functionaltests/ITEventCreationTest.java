@@ -18,6 +18,11 @@
  */
 package com.nuxeo.functionaltests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,21 +30,13 @@ import org.nuxeo.functionaltests.AbstractTest;
 import org.nuxeo.functionaltests.fragment.GadgetsContainerFragment;
 import org.nuxeo.functionaltests.pages.DocumentBasePage;
 import org.nuxeo.functionaltests.pages.DocumentBasePage.UserNotConnectedException;
-import org.nuxeo.functionaltests.pages.FileDocumentBasePage;
 import org.nuxeo.functionaltests.pages.UserHomePage;
 import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersGroupsBasePage;
 import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersTabSubPage;
-import org.nuxeo.functionaltests.pages.forms.FileCreationFormPage;
 import org.nuxeo.functionaltests.pages.tabs.AccessRightsSubPage;
-import org.nuxeo.functionaltests.pages.tabs.SummaryTabSubPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.io.IOException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Agenda tests.
@@ -53,7 +50,8 @@ public class ITEventCreationTest extends AbstractTest {
     private final static String WORKSPACE_TITLE = "events";
 
     @Before
-    public void createUserAndWorkspaceForEvents() throws UserNotConnectedException {
+    public void createUserAndWorkspaceForEvents()
+            throws UserNotConnectedException {
         login();
 
         UsersGroupsBasePage page;
@@ -85,8 +83,7 @@ public class ITEventCreationTest extends AbstractTest {
     }
 
     @After
-    public void cleanup()
-            throws DocumentBasePage.UserNotConnectedException {
+    public void cleanup() throws DocumentBasePage.UserNotConnectedException {
         login();
         driver.findElement(By.linkText("Workspaces")).click();
         asPage(DocumentBasePage.class).getContentTab().removeAllDocuments();
@@ -101,19 +98,21 @@ public class ITEventCreationTest extends AbstractTest {
         logout();
     }
 
-    protected DocumentBasePage createTestEvent(DocumentBasePage page) throws IOException {
-        page.getContentTab().goToDocument(
-                "Workspaces").getContentTab().goToDocument(WORKSPACE_TITLE);
+    protected DocumentBasePage createTestEvent(DocumentBasePage page)
+            throws IOException {
+        page.getContentTab().goToDocument("Workspaces").getContentTab().goToDocument(
+                WORKSPACE_TITLE);
 
         EventCreationFormPage eventCreationFormPage = page.getContentTab().getDocumentCreatePage(
                 "Event", EventCreationFormPage.class);
 
-        return eventCreationFormPage.createEventDocument(
-                "My Event", "Event description", "1/1/2300 12:00 PM", "1/1/2300 12:00 PM");
+        return eventCreationFormPage.createEventDocument("My Event",
+                "Event description", "1/1/2300 12:00 PM", "1/1/2300 12:00 PM");
     }
 
     @Test
-    public void testAgendaGadget() throws UserNotConnectedException, IOException {
+    public void testAgendaGadget() throws UserNotConnectedException,
+            IOException {
         DocumentBasePage page = login(USERNAME, PASSWORD);
         createTestEvent(page);
 
@@ -133,16 +132,18 @@ public class ITEventCreationTest extends AbstractTest {
         driver.switchTo().defaultContent();
 
         // test the content
-        GadgetsContainerFragment gadgetsFragment = getWebFragment(userHome.gadgetsContainer,
-                GadgetsContainerFragment.class);
+        GadgetsContainerFragment gadgetsFragment = getWebFragment(
+                userHome.gadgetsContainer, GadgetsContainerFragment.class);
         gadgetsFragment.waitForGadgetsLoad("content");
 
         WebElement agendaFrame = driver.findElement(By.cssSelector(".gwt-Frame.agenda"));
         driver.switchTo().defaultContent();
         WebDriver agendaDriver = driver.switchTo().frame(agendaFrame);
 
-        assertEquals("Incoming events", agendaDriver.findElement(By.id("betweenBanner")).getText());
-        assertTrue(agendaDriver.findElement(By.id("agenda")).getText().contains("My Event"));
+        assertEquals("Incoming events",
+                agendaDriver.findElement(By.id("betweenBanner")).getText());
+        assertTrue(agendaDriver.findElement(By.id("agenda")).getText().contains(
+                "My Event"));
         agendaDriver.switchTo().defaultContent();
 
         logout();
