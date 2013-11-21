@@ -35,7 +35,6 @@ import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersGroupsBas
 import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersTabSubPage;
 import org.nuxeo.functionaltests.pages.tabs.AccessRightsSubPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -138,13 +137,13 @@ public class ITEventCreationTest extends AbstractTest {
 
         WebElement agendaFrame = driver.findElement(By.cssSelector(".gwt-Frame.agenda"));
         driver.switchTo().defaultContent();
-        WebDriver agendaDriver = driver.switchTo().frame(agendaFrame);
+        driver.switchTo().frame(agendaFrame);
 
-        assertEquals("Incoming events",
-                agendaDriver.findElement(By.id("betweenBanner")).getText());
-        assertTrue(agendaDriver.findElement(By.id("agenda")).getText().contains(
+        WebElement betweenBanner = waitUntilElementPresent(By.id("betweenBanner"));
+        assertEquals("Incoming events", betweenBanner.getText());
+        assertTrue(driver.findElement(By.id("agenda")).getText().contains(
                 "My Event"));
-        agendaDriver.switchTo().defaultContent();
+        driver.switchTo().defaultContent();
 
         logout();
     }
