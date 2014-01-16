@@ -27,6 +27,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.nuxeo.functionaltests.AbstractTest;
+import org.nuxeo.functionaltests.Locator;
 import org.nuxeo.functionaltests.fragment.GadgetsContainerFragment;
 import org.nuxeo.functionaltests.pages.DocumentBasePage;
 import org.nuxeo.functionaltests.pages.DocumentBasePage.UserNotConnectedException;
@@ -119,7 +120,7 @@ public class ITEventCreationTest extends AbstractTest {
         userHome = userHome.goToDashboard();
 
         // add the gadget
-        waitUntilElementPresent(By.id("addGadgetButton"));
+        Locator.waitUntilElementPresent(By.id("addGadgetButton"));
         WebElement addGadgetButton = driver.findElement(By.id("addGadgetButton"));
         addGadgetButton.click();
         // wait for fancybox
@@ -127,7 +128,7 @@ public class ITEventCreationTest extends AbstractTest {
 
         driver.switchTo().defaultContent();
         driver.switchTo().frame("fancybox-frame");
-        waitUntilElementPresent(By.xpath("//div[@gadget-name='agenda']")).click();
+        Locator.findElementWithTimeout(By.xpath("//div[@gadget-name='agenda']")).click();
         driver.switchTo().defaultContent();
 
         // test the content
@@ -139,7 +140,7 @@ public class ITEventCreationTest extends AbstractTest {
         driver.switchTo().defaultContent();
         driver.switchTo().frame(agendaFrame);
 
-        WebElement betweenBanner = waitUntilElementPresent(By.id("betweenBanner"));
+        WebElement betweenBanner = Locator.findElementWithTimeout(By.id("betweenBanner"));
         assertEquals("Incoming events", betweenBanner.getText());
         assertTrue(driver.findElement(By.id("agenda")).getText().contains(
                 "My Event"));
