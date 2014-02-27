@@ -26,7 +26,7 @@ public class EventCreationFormPage extends AbstractPage {
     @FindBy(id = "document_create:nxl_vevent:nxw_vevent_dtendInputDate")
     public WebElement endDateTextInput;
 
-    @FindBy(id = "document_create:nxw_doc_documentCreateButtons_CREATE_DOCUMENT")
+    @FindBy(id = "document_create:nxw_documentCreateButtons_CREATE_DOCUMENT")
     public WebElement createButton;
 
     public EventCreationFormPage(WebDriver driver) {
