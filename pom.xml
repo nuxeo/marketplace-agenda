@@ -3,17 +3,17 @@
   <parent>
     <groupId>org.nuxeo.ecm.distribution</groupId>
     <artifactId>nuxeo-distribution</artifactId>
-    <version>5.9.4-SNAPSHOT</version>
+    <version>5.9.4</version>
   </parent>
 
   <groupId>org.nuxeo.marketplace.agenda</groupId>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
   <name>Nuxeo Agenda Marketplace package</name>
-  <version>1.1.3-SNAPSHOT</version>
+  <version>1.1.3</version>
 
   <properties>
-    <marketplace.agenda.version>1.1.3-SNAPSHOT</marketplace.agenda.version>
+    <marketplace.agenda.version>1.1.3</marketplace.agenda.version>
   </properties>
 
   <modules>
