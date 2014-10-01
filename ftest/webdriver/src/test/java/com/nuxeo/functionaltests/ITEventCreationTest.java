@@ -75,8 +75,8 @@ public class ITEventCreationTest extends AbstractTest {
         // Workspace
         if (!accessRightSubTab.hasPermissionForUser("Manage everything",
                 USERNAME)) {
-            accessRightSubTab.addPermissionForUser(USERNAME,
-                    "Manage everything", true);
+            accessRightSubTab.grantPermissionForUser("Manage everything",
+                USERNAME);
         }
 
         logout();
