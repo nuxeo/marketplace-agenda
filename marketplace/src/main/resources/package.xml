@@ -17,6 +17,9 @@
   <platforms>
     <platform>cap-@DISTRIB_VERSION@</platform>
   </platforms>
+  <dependencies>
+    <package>nuxeo-opensocial</package>
+  </dependencies>
   <license>LGPL 2.1</license>
   <license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
   <visibility>PUBLIC</visibility>
