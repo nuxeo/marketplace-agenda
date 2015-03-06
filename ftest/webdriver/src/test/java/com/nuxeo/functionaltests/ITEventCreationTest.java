@@ -25,6 +25,7 @@ import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.nuxeo.functionaltests.AbstractTest;
 import org.nuxeo.functionaltests.Locator;
@@ -111,6 +112,7 @@ public class ITEventCreationTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void testAgendaGadget() throws UserNotConnectedException,
             IOException {
         DocumentBasePage page = login(USERNAME, PASSWORD);
