@@ -25,14 +25,11 @@ import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.nuxeo.functionaltests.AbstractTest;
 import org.nuxeo.functionaltests.Locator;
-import org.nuxeo.functionaltests.fragment.GadgetsContainerFragment;
 import org.nuxeo.functionaltests.pages.DocumentBasePage;
 import org.nuxeo.functionaltests.pages.DocumentBasePage.UserNotConnectedException;
-import org.nuxeo.functionaltests.pages.UserHomePage;
 import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersGroupsBasePage;
 import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersTabSubPage;
 import org.nuxeo.functionaltests.pages.tabs.AccessRightsSubPage;
@@ -77,7 +74,7 @@ public class ITEventCreationTest extends AbstractTest {
         if (!accessRightSubTab.hasPermissionForUser("Manage everything",
                 USERNAME)) {
             accessRightSubTab.grantPermissionForUser("Manage everything",
-                USERNAME);
+                    USERNAME);
         }
 
         logout();
@@ -112,35 +109,12 @@ public class ITEventCreationTest extends AbstractTest {
     }
 
     @Test
-    @Ignore
-    public void testAgendaGadget() throws UserNotConnectedException,
+    public void testEventsWidget() throws UserNotConnectedException,
             IOException {
         DocumentBasePage page = login(USERNAME, PASSWORD);
         createTestEvent(page);
 
-        UserHomePage userHome = page.getUserHome();
-        userHome = userHome.goToDashboard();
-
-        // add the gadget
-        Locator.waitUntilElementPresent(By.id("addGadgetButton"));
-        WebElement addGadgetButton = driver.findElement(By.id("addGadgetButton"));
-        addGadgetButton.click();
-        // wait for fancybox
-        userHome.getFancyBoxContent();
-
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("fancybox-frame");
-        Locator.findElementWithTimeout(By.xpath("//div[@gadget-name='agenda']")).click();
-        driver.switchTo().defaultContent();
-
-        // test the content
-        GadgetsContainerFragment gadgetsFragment = getWebFragment(
-                userHome.gadgetsContainer, GadgetsContainerFragment.class);
-        gadgetsFragment.waitForGadgetsLoad("content");
-
-        WebElement agendaFrame = driver.findElement(By.cssSelector(".gwt-Frame.agenda"));
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame(agendaFrame);
+        page.getUserHome().goToDashboard();
 
         WebElement betweenBanner = Locator.findElementWithTimeout(By.id("betweenBanner"));
         assertEquals("Incoming events", betweenBanner.getText());
