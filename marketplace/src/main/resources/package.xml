@@ -19,7 +19,7 @@
     <platform>cap-@DISTRIB_VERSION@-HF*</platform>
   </platforms>
   <dependencies>
-    <package>cap-6.0-HF09</package>
+    <package>nuxeo-6.0-HF09</package>
   </dependencies>
   <license>LGPL 2.1</license>
   <license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
