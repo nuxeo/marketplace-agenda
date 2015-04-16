@@ -19,9 +19,11 @@
     <platform>cap-@DISTRIB_VERSION@</platform>
     <platform>cap-@DISTRIB_VERSION@-HF*</platform>
   </platforms>
+  <!--
   <dependencies>
     <package>nuxeo-6.0-HF10</package>
   </dependencies>
+  -->
   <license>LGPL 2.1</license>
   <license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
   <visibility>MARKETPLACE</visibility>
