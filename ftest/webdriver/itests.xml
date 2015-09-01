@@ -12,7 +12,7 @@
   <property name="mp.install" value="file:${out.dir}/marketplace-agenda-${marketplace.agenda.version}.zip" />
   <target name="prepare-environment" depends="_init,prepare-db,prepare-tomcat,prepare-jboss">
     <copy todir="${out.dir}">
-      <artifact:resolveFile key="org.nuxeo.marketplace.agenda:marketplace-agenda::zip" />
+      <artifact:file key="org.nuxeo.marketplace.agenda:marketplace-agenda::zip" />
     </copy>
   </target>
 
