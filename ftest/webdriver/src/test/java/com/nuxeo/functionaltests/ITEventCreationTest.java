@@ -32,7 +32,7 @@ import org.nuxeo.functionaltests.pages.DocumentBasePage;
 import org.nuxeo.functionaltests.pages.DocumentBasePage.UserNotConnectedException;
 import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersGroupsBasePage;
 import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersTabSubPage;
-import org.nuxeo.functionaltests.pages.tabs.AccessRightsSubPage;
+import org.nuxeo.functionaltests.pages.tabs.PermissionsSubPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -68,11 +68,11 @@ public class ITEventCreationTest extends AbstractTest {
                                                     .getNavigationSubPage()
                                                     .goToDocument("Workspaces");
         DocumentBasePage workspacePage = createWorkspace(documentBasePage, WORKSPACE_TITLE, "");
-        AccessRightsSubPage accessRightSubTab = workspacePage.getManageTab().getAccessRightsSubTab();
+        PermissionsSubPage permissionsSubPage = workspacePage.getPermissionsTab();
         // Need WriteSecurity (so in practice Manage everything) to edit a
         // Workspace
-        if (!accessRightSubTab.hasPermissionForUser("Manage everything", USERNAME)) {
-            accessRightSubTab.grantPermissionForUser("Manage everything", USERNAME);
+        if (!permissionsSubPage.hasPermissionForUser("Manage everything", USERNAME)) {
+            permissionsSubPage.grantPermissionForUser("Manage everything", USERNAME);
         }
 
         logout();
