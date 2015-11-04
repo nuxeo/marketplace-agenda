@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.nuxeo.functionaltests.pages.AbstractPage;
 import org.nuxeo.functionaltests.pages.DocumentBasePage;
-import org.nuxeo.functionaltests.pages.FileDocumentBasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,8 +32,8 @@ public class EventCreationFormPage extends AbstractPage {
         super(driver);
     }
 
-    public DocumentBasePage createEventDocument(String title, String place,
-            String startDate, String endDate) throws IOException {
+    public DocumentBasePage createEventDocument(String title, String place, String startDate, String endDate)
+            throws IOException {
         titleTextInput.sendKeys(title);
         placeTextInput.sendKeys(place);
         startDateTextInput.sendKeys(startDate);

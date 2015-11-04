@@ -48,33 +48,31 @@ public class ITEventCreationTest extends AbstractTest {
     private final static String WORKSPACE_TITLE = "events";
 
     @Before
-    public void createUserAndWorkspaceForEvents()
-            throws UserNotConnectedException {
+    public void createUserAndWorkspaceForEvents() throws UserNotConnectedException {
         login();
 
         UsersGroupsBasePage page;
         UsersTabSubPage usersTab = login().getAdminCenter().getUsersGroupsHomePage().getUsersTab();
         usersTab = usersTab.searchUser(USERNAME);
         if (!usersTab.isUserFound(USERNAME)) {
-            page = usersTab.getUserCreatePage().createUser(USERNAME, USERNAME,
-                    "lastname1", "company1", "email1", PASSWORD, "members");
+            page = usersTab.getUserCreatePage().createUser(USERNAME, USERNAME, "lastname1", "company1", "email1",
+                    PASSWORD, "members");
             usersTab = page.getUsersTab(true);
         } // search user usersTab =
         usersTab.searchUser(USERNAME);
         assertTrue(usersTab.isUserFound(USERNAME));
 
         // create a new wokspace and grant all rights to the test user
-        DocumentBasePage documentBasePage = usersTab.exitAdminCenter().getHeaderLinks().getNavigationSubPage().goToDocument(
-                "Workspaces");
-        DocumentBasePage workspacePage = createWorkspace(documentBasePage,
-                WORKSPACE_TITLE, "");
+        DocumentBasePage documentBasePage = usersTab.exitAdminCenter()
+                                                    .getHeaderLinks()
+                                                    .getNavigationSubPage()
+                                                    .goToDocument("Workspaces");
+        DocumentBasePage workspacePage = createWorkspace(documentBasePage, WORKSPACE_TITLE, "");
         AccessRightsSubPage accessRightSubTab = workspacePage.getManageTab().getAccessRightsSubTab();
         // Need WriteSecurity (so in practice Manage everything) to edit a
         // Workspace
-        if (!accessRightSubTab.hasPermissionForUser("Manage everything",
-                USERNAME)) {
-            accessRightSubTab.grantPermissionForUser("Manage everything",
-                    USERNAME);
+        if (!accessRightSubTab.hasPermissionForUser("Manage everything", USERNAME)) {
+            accessRightSubTab.grantPermissionForUser("Manage everything", USERNAME);
         }
 
         logout();
@@ -96,21 +94,18 @@ public class ITEventCreationTest extends AbstractTest {
         logout();
     }
 
-    protected DocumentBasePage createTestEvent(DocumentBasePage page)
-            throws IOException {
-        page.getContentTab().goToDocument("Workspaces").getContentTab().goToDocument(
-                WORKSPACE_TITLE);
+    protected DocumentBasePage createTestEvent(DocumentBasePage page) throws IOException {
+        page.getContentTab().goToDocument("Workspaces").getContentTab().goToDocument(WORKSPACE_TITLE);
 
-        EventCreationFormPage eventCreationFormPage = page.getContentTab().getDocumentCreatePage(
-                "Event", EventCreationFormPage.class);
+        EventCreationFormPage eventCreationFormPage = page.getContentTab().getDocumentCreatePage("Event",
+                EventCreationFormPage.class);
 
-        return eventCreationFormPage.createEventDocument("My Event",
-                "Event description", "1/1/2300 12:00 PM", "1/1/2300 12:00 PM");
+        return eventCreationFormPage.createEventDocument("My Event", "Event description", "1/1/2300 12:00 PM",
+                "1/1/2300 12:00 PM");
     }
 
     @Test
-    public void testEventsWidget() throws UserNotConnectedException,
-            IOException {
+    public void testEventsWidget() throws UserNotConnectedException, IOException {
         DocumentBasePage page = login(USERNAME, PASSWORD);
         createTestEvent(page);
 
@@ -118,8 +113,7 @@ public class ITEventCreationTest extends AbstractTest {
 
         WebElement betweenBanner = Locator.findElementWithTimeout(By.id("betweenBanner"));
         assertEquals("Incoming events", betweenBanner.getText());
-        assertTrue(driver.findElement(By.id("agenda")).getText().contains(
-                "My Event"));
+        assertTrue(driver.findElement(By.id("agenda")).getText().contains("My Event"));
         driver.switchTo().defaultContent();
 
         logout();
