@@ -5,7 +5,7 @@
     <p>Nuxeo Agenda enables users to create events that will be displayed to users in a dedicated agenda gadget on their dashboard.</p>
     <p>As soon as a user can access the workspace or folder in which the event has been created, he can see the event in the agenda gadget.</p>
   </description>
-  <home-page>http://doc.nuxeo.com/x/BoGo</home-page>
+  <home-page>https://doc.nuxeo.com/nxdoc/nuxeo-agenda/</home-page>
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
