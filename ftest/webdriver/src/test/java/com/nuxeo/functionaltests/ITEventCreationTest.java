@@ -112,7 +112,7 @@ public class ITEventCreationTest extends AbstractTest {
         page.getUserHome().goToDashboard();
 
         WebElement betweenBanner = Locator.findElementWithTimeout(By.id("betweenBanner"));
-        assertEquals("Incoming events", betweenBanner.getText());
+        assertEquals("Incoming Events", betweenBanner.getText());
         assertTrue(driver.findElement(By.id("agenda")).getText().contains("My Event"));
         driver.switchTo().defaultContent();
 
