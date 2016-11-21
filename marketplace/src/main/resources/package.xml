@@ -1,9 +1,7 @@
 <!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
 <package type="addon" name="nuxeo-agenda" version="@VERSION@">
   <title>Nuxeo Agenda</title>
-  <description>
-    <p>Nuxeo Agenda enables users to create events that will be displayed to users in a dedicated agenda gadget on their dashboard.</p>
-    <p>As soon as a user can access the workspace or folder in which the event has been created, he can see the event in the agenda gadget.</p>
+  <description>The Nuxeo Agenda addon enables to bind documents to events in agendas. The plugin is designed to let you add the ``agenda`` capability to your own document types thanks to the usage of a facet. The goal is typically to organise comittee session and display all documents / topics at stake for the meeting. There is no integration with any mainstream calendar management solution such as Google Calendar or Microsoft Outlook.
   </description>
   <home-page>https://doc.nuxeo.com/nxdoc/nuxeo-agenda/</home-page>
   <vendor>Nuxeo</vendor>
