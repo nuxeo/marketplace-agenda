@@ -11,6 +11,10 @@
   <packaging>zip</packaging>
   <name>Marketplace package</name>
 
+  <properties>
+    <nuxeo.agenda.version>8.10-SNAPSHOT</nuxeo.agenda.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.nuxeo.ecm.distribution</groupId>
@@ -27,7 +31,13 @@
 
     <dependency>
       <groupId>org.nuxeo.ecm.platform</groupId>
-      <artifactId>nuxeo-agenda</artifactId>
+      <artifactId>nuxeo-agenda-core</artifactId>
+      <version>${nuxeo.agenda.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-agenda-jsf</artifactId>
+      <version>${nuxeo.agenda.version}</version>
     </dependency>
   </dependencies>
 
