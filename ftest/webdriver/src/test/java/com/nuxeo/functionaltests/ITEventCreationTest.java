@@ -15,11 +15,15 @@
  *     Sun Seng David TAN
  *     Florent Guillaume
  *     Antoine Taillefer
+ *     Mincong Huang
  */
 package com.nuxeo.functionaltests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.nuxeo.functionaltests.Constants.WORKSPACES_PATH;
+import static org.nuxeo.functionaltests.Constants.WORKSPACES_TITLE;
+import static org.nuxeo.functionaltests.Constants.WORKSPACE_TYPE;
 
 import java.io.IOException;
 
@@ -28,11 +32,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.nuxeo.functionaltests.AbstractTest;
 import org.nuxeo.functionaltests.Locator;
+import org.nuxeo.functionaltests.RestHelper;
 import org.nuxeo.functionaltests.pages.DocumentBasePage;
 import org.nuxeo.functionaltests.pages.DocumentBasePage.UserNotConnectedException;
-import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersGroupsBasePage;
-import org.nuxeo.functionaltests.pages.admincenter.usermanagement.UsersTabSubPage;
-import org.nuxeo.functionaltests.pages.tabs.PermissionsSubPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -45,45 +47,20 @@ public class ITEventCreationTest extends AbstractTest {
 
     private final static String PASSWORD = "test";
 
-    private final static String WORKSPACE_TITLE = "events";
+    private final static String EVENTS_WORKSPACE_TITLE = "events";
+
+    private final static String EVENTS_WORKSPACE_PATH = WORKSPACES_PATH + EVENTS_WORKSPACE_TITLE;
 
     @Before
     public void createUserAndWorkspaceForEvents() throws UserNotConnectedException {
-        login();
-
-        UsersGroupsBasePage page;
-        UsersTabSubPage usersTab = login().getAdminCenter().getUsersGroupsHomePage().getUsersTab();
-        usersTab = usersTab.searchUser(USERNAME);
-        if (!usersTab.isUserFound(USERNAME)) {
-            page = usersTab.getUserCreatePage().createUser(USERNAME, USERNAME, "lastname1", "company1", "email1",
-                    PASSWORD, "members");
-            usersTab = page.getUsersTab(true);
-        } // search user usersTab =
-        usersTab.searchUser(USERNAME);
-        assertTrue(usersTab.isUserFound(USERNAME));
-
-        // create a new wokspace and grant all rights to the test user
-        DocumentBasePage documentBasePage = usersTab.exitAdminCenter()
-                                                    .getHeaderLinks()
-                                                    .getNavigationSubPage()
-                                                    .goToDocument("Workspaces");
-        DocumentBasePage workspacePage = createWorkspace(documentBasePage, WORKSPACE_TITLE, "");
-        PermissionsSubPage permissionsSubPage = workspacePage.getPermissionsTab();
-        // Need WriteSecurity (so in practice Manage everything) to edit a
-        // Workspace
-        if (!permissionsSubPage.hasPermissionForUser("Manage everything", USERNAME)) {
-            permissionsSubPage.grantPermissionForUser("Manage everything", USERNAME);
-        }
-
-        logout();
+        RestHelper.createUser(USERNAME, PASSWORD, USERNAME, "lastname1", "company1", "email1", "members");
+        RestHelper.createDocument(WORKSPACES_PATH, WORKSPACE_TYPE, EVENTS_WORKSPACE_TITLE, null);
+        RestHelper.addPermission(EVENTS_WORKSPACE_PATH, USERNAME, "Everything");
     }
 
     @After
     public void cleanup() throws DocumentBasePage.UserNotConnectedException {
-        login();
-        driver.findElement(By.linkText("Workspaces")).click();
-        asPage(DocumentBasePage.class).getContentTab().removeAllDocuments();
-        logout();
+        RestHelper.cleanup();
     }
 
     @Test
@@ -95,7 +72,7 @@ public class ITEventCreationTest extends AbstractTest {
     }
 
     protected DocumentBasePage createTestEvent(DocumentBasePage page) throws IOException {
-        page.getContentTab().goToDocument("Workspaces").getContentTab().goToDocument(WORKSPACE_TITLE);
+        page.getContentTab().goToDocument(WORKSPACES_TITLE).getContentTab().goToDocument(EVENTS_WORKSPACE_TITLE);
 
         EventCreationFormPage eventCreationFormPage = page.getContentTab().getDocumentCreatePage("Event",
                 EventCreationFormPage.class);
