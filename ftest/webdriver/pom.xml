@@ -8,8 +8,8 @@
   </parent>
 
   <artifactId>webdriver</artifactId>
-  <name>Nuxeo CSV functional tests with WebDriver</name>
-  <description>Nuxeo CSV functional tests with WebDriver</description>
+  <name>Nuxeo Agenda functional tests with WebDriver</name>
+  <description>Nuxeo Agenda functional tests with WebDriver</description>
 
   <properties>
     <some.password>setTheValueInYourSettings</some.password>
