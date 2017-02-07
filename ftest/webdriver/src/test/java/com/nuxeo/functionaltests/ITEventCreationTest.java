@@ -1,5 +1,5 @@
 /*
- * (C) Copyright 2012 Nuxeo SA (http://nuxeo.com/) and contributors.
+ * (C) Copyright 2017 Nuxeo SA (http://nuxeo.com/) and contributors.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser General Public License
@@ -36,7 +36,6 @@ import org.nuxeo.functionaltests.RestHelper;
 import org.nuxeo.functionaltests.pages.DocumentBasePage;
 import org.nuxeo.functionaltests.pages.DocumentBasePage.UserNotConnectedException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 /**
  * Agenda tests.
@@ -88,8 +87,7 @@ public class ITEventCreationTest extends AbstractTest {
 
         page.getUserHome().goToDashboard();
 
-        WebElement betweenBanner = Locator.findElementWithTimeout(By.id("betweenBanner"));
-        assertEquals("Incoming Events", betweenBanner.getText());
+        Locator.waitForTextPresent(By.id("betweenBanner"), "Incoming Events");
         assertTrue(driver.findElement(By.id("agenda")).getText().contains("My Event"));
         driver.switchTo().defaultContent();
 
