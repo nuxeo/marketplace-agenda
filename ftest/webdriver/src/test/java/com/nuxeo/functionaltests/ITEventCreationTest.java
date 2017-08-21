@@ -53,7 +53,7 @@ public class ITEventCreationTest extends AbstractTest {
     @Before
     public void createUserAndWorkspaceForEvents() throws UserNotConnectedException {
         RestHelper.createUser(USERNAME, PASSWORD, USERNAME, "lastname1", "company1", "email1", "members");
-        RestHelper.createDocument(WORKSPACES_PATH, WORKSPACE_TYPE, EVENTS_WORKSPACE_TITLE, null);
+        RestHelper.createDocument(WORKSPACES_PATH, WORKSPACE_TYPE, EVENTS_WORKSPACE_TITLE);
         RestHelper.addPermission(EVENTS_WORKSPACE_PATH, USERNAME, "Everything");
     }
 
