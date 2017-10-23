@@ -183,6 +183,11 @@
       </filterset>
     </copy>
 
+    <nx:studioExtraction todir="${outdir}/marketplace">
+      <fileset dir="${outdir}/marketplace/install/bundles"/>
+      <fileset dir="${outdir}/marketplace/install/bundles-jsf-ui"/>
+    </nx:studioExtraction>
+
     <zip destfile="${outdir}/${maven.project.artifactId}-${marketplace.agenda.version}.zip"
          basedir="${outdir}/marketplace" />
     <artifact:attach file="${outdir}/${maven.project.artifactId}-${marketplace.agenda.version}.zip" type="zip" />
