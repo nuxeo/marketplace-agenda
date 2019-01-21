@@ -10,10 +10,10 @@
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
   <name>Nuxeo Agenda Marketplace package</name>
-  <version>1.6.3</version>
+  <version>1.6.4-SNAPSHOT</version>
 
   <properties>
-    <marketplace.agenda.version>1.6.3</marketplace.agenda.version>
+    <marketplace.agenda.version>1.6.4-SNAPSHOT</marketplace.agenda.version>
   </properties>
 
   <modules>
