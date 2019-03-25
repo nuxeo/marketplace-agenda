@@ -73,11 +73,11 @@ public class ITEventCreationTest extends AbstractTest {
     protected DocumentBasePage createTestEvent(DocumentBasePage page) throws IOException {
         page.getContentTab().goToDocument(WORKSPACES_TITLE).getContentTab().goToDocument(EVENTS_WORKSPACE_TITLE);
 
-        EventCreationFormPage eventCreationFormPage = page.getContentTab().getDocumentCreatePage("Event",
-                EventCreationFormPage.class);
+        EventCreationFormPage eventCreationFormPage = page.getContentTab()
+                                                          .getDocumentCreatePage("Event", EventCreationFormPage.class);
 
-        return eventCreationFormPage.createEventDocument("My Event", "Event description", "1/1/2300 12:00 PM",
-                "1/1/2300 12:00 PM");
+        return eventCreationFormPage.createEventDocument("My Event", "Event description", "1/1/2300, 12:00 PM",
+                "1/1/2300, 12:00 PM");
     }
 
     @Test
